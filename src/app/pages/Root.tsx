@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet, useNavigate, useLocation, Navigate } from 'react-router';
 import { useAuth } from '../contexts/AuthContext';
-import { Home, ListTodo, User, Megaphone, Sparkles } from 'lucide-react';
+import { Home, ListTodo, User, Megaphone, Sparkles, Settings } from 'lucide-react';
 import { motion } from 'motion/react';
 
 export default function Root() {
@@ -9,12 +9,17 @@ export default function Root() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const navigation = [
+  const baseNavigation = [
     { name: 'داشبورد', path: '/dashboard', icon: Home },
     { name: 'وظایف', path: '/tasks', icon: ListTodo },
     { name: 'اطلاعیه‌ها', path: '/announcements', icon: Megaphone },
     { name: 'پروفایل', path: '/profile', icon: User },
   ];
+  const adminNavItem = { name: 'مدیریت', path: '/admin', icon: Settings };
+  const navigation =
+    user && (user.role === 'admin' || user.role === 'manager')
+      ? [...baseNavigation, adminNavItem]
+      : baseNavigation;
   const activeMobileIndex = navigation.findIndex((item) => item.path === location.pathname);
 
   // Public routes that don't need auth
@@ -36,7 +41,7 @@ export default function Root() {
             className="lg:hidden fixed bottom-4 left-4 right-4 z-50"
           >
             <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 px-2 py-3">
-              <div className="relative grid grid-cols-4 gap-1">
+              <div className={`relative grid gap-1 ${navigation.length === 5 ? 'grid-cols-5' : 'grid-cols-4'}`}>
                 {activeMobileIndex >= 0 && (
                   <motion.div
                     initial={false}

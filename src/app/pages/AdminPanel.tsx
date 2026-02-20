@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { useTasks, Task, TaskType } from '../contexts/TaskContext';
 import { useAnnouncements } from '../contexts/AnnouncementContext';
@@ -42,7 +42,9 @@ export default function AdminPanel() {
     author: user?.name || '',
   });
 
-  if (!user || (user.role !== 'admin' && user.role !== 'manager')) {
+  // For testing: allow any logged-in user. Restore role check for production:
+  // if (!user || (user.role !== 'admin' && user.role !== 'manager'))
+  if (!user) {
     return (
       <div className="min-h-screen bg-gray-50 p-4 flex items-center justify-center">
         <div className="text-center">

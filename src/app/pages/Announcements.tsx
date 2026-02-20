@@ -43,9 +43,9 @@ export default function Announcements() {
         {/* Announcements List */}
         <div className="space-y-6">
           {announcements.map((announcement) => (
-            <div key={announcement.id} className="bg-white rounded-xl shadow-sm border border-gray-100">
+            <div key={announcement.id} className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
               {/* Announcement Header */}
-              <div className="p-6 border-b border-gray-100">
+              <div className="p-4 md:p-6 border-b border-gray-100">
                 <h2 className="text-xl font-bold text-gray-900 mb-2">
                   {announcement.title}
                 </h2>
@@ -73,7 +73,7 @@ export default function Announcements() {
               </div>
 
               {/* Reactions */}
-              <div className="px-6 py-3 border-b border-gray-100">
+              <div className="px-4 md:px-6 py-3 border-b border-gray-100">
                 <div className="flex items-center gap-2 flex-wrap">
                   {Object.entries(announcement.reactions).map(([emoji, count]) => (
                     <button
@@ -113,7 +113,7 @@ export default function Announcements() {
               </div>
 
               {/* Comments */}
-              <div className="p-6">
+              <div className="p-4 md:p-6">
                 <div className="flex items-center gap-2 mb-4 text-gray-700">
                   <MessageCircle size={18} />
                   <span className="font-medium">نظرات ({announcement.comments.length})</span>
@@ -151,7 +151,7 @@ export default function Announcements() {
                   <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
                     {user.name.charAt(0)}
                   </div>
-                  <div className="flex-1 flex gap-2">
+                  <div className="flex-1 flex gap-2 items-center min-w-0">
                     <input
                       type="text"
                       value={commentTexts[announcement.id] || ''}
@@ -167,12 +167,12 @@ export default function Announcements() {
                         }
                       }}
                       placeholder="نظر خود را بنویسید..."
-                      className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="flex-1 min-w-0 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                     <button
                       onClick={() => handleAddComment(announcement.id)}
                       disabled={!commentTexts[announcement.id]?.trim()}
-                      className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="flex-shrink-0 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       <Send size={18} />
                     </button>
