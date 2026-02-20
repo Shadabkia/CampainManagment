@@ -87,7 +87,7 @@ export default function Root() {
                 </div>
                 <div>
                   <h1 className="font-bold text-lg bg-gradient-to-r from-[#667eea] to-[#764ba2] bg-clip-text text-transparent">
-                    حزب مردم ایران
+                    حزب عوام ایران
                   </h1>
                   <p className="text-xs text-gray-500">سامانه مدیریت کمپین</p>
                 </div>
