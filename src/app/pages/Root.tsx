@@ -26,6 +26,11 @@ export default function Root() {
   const publicRoutes = ['/login', '/register'];
   const isPublicRoute = publicRoutes.includes(location.pathname);
 
+  // Logged-in users must never see login/register — redirect to tasks
+  if (isAuthenticated && isPublicRoute) {
+    return <Navigate to="/tasks" replace />;
+  }
+
   // Redirect to login if not authenticated and not on public route
   if (!isAuthenticated && !isPublicRoute) {
     return <Navigate to="/login" replace />;

@@ -38,6 +38,7 @@
 - **Flexible login:** OTP-based and password-based login, plus "Forgot Password" flow.
 - **JWT with refresh tokens:** Stateless, secure sessions with token rotation.
 - **RBAC:** Role-based access control (admin, section manager, user) enforced across APIs and UI.
+- **Auth-aware navigation:** Logged-in users must never see the login or register pages; they are redirected to the tasks screen. On startup, a user with a valid stored session lands on the tasks screen.
 
 ---
 

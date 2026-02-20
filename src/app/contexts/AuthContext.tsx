@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, ReactNode } from 'react';
 
 interface User {
   id: string;
@@ -71,16 +71,17 @@ const mockUsers: User[] = [
   },
 ];
 
-export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+function getInitialUser(): User | null {
+  try {
+    const stored = localStorage.getItem('campaign_user');
+    return stored ? JSON.parse(stored) : null;
+  } catch {
+    return null;
+  }
+}
 
-  useEffect(() => {
-    // Check for stored user session
-    const storedUser = localStorage.getItem('campaign_user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-  }, []);
+export function AuthProvider({ children }: { children: ReactNode }) {
+  const [user, setUser] = useState<User | null>(getInitialUser);
 
   const login = async (mobile: string, password: string) => {
     // Mock login logic
