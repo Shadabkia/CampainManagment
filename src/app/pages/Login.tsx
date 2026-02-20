@@ -121,7 +121,7 @@ export default function Login() {
               <Sparkles className="text-white" size={40} />
             </motion.div>
             <h1 className="text-3xl font-bold bg-gradient-to-r from-[#667eea] to-[#764ba2] bg-clip-text text-transparent mb-2">
-              حزب مردم ایران
+              حزب عوام ایران
             </h1>
             <p className="text-gray-600">ورود به سامانه کمپین</p>
           </div>
